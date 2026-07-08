@@ -21,6 +21,9 @@ RUN pnpm build
 # Production image
 FROM node:22-alpine AS production
 
+# Activate pnpm in production environment as well
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
 RUN apk add --no-cache tini curl
 
 WORKDIR /app
